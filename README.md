@@ -6,10 +6,13 @@ A collection of reusable agent definitions for [gemini-ma](https://github.com/on
 
 ```
 gemini-ma-agents/
-├── agents/              # Production-ready agent definitions
-│   ├── ollama-coder.md   # Ollama-based coding agent (full tools)
-│   ├── llamacpp-coder.md # llama.cpp/vLLM coding agent (simplified)
-│   └── ...
+├── agents/              # Agent definitions
+│   ├── ollama-coder.md            # Ollama coding agent (full tools)
+│   ├── llamacpp-coder.md          # llama.cpp main agent (simplified)
+│   ├── llamacpp-expanded-tools.md # llama.cpp with expanded toolset
+│   ├── llamacpp-test-multi.md     # Test: multiple tools
+│   ├── llamacpp-test-read.md      # Test: single Read tool
+│   └── llamacpp-test-readwrite.md # Test: Read + Write tools
 ├── examples/            # Example agent definitions for learning
 ├── scripts/             # Installation and management scripts
 │   ├── install.sh       # Copy agents to a project
@@ -102,6 +105,41 @@ gemini-ma --agent llamacpp_coder
 ```
 
 **Note:** For full tool support and complex workflows, use the `ollama-coder` agent instead.
+
+### Experimental llama.cpp Agents
+
+The following agents were created during testing to explore different tool configurations with llama.cpp:
+
+#### `llamacpp-expanded-tools`
+Tests llama.cpp with an expanded toolset including file operations and code exploration tools.
+- **Tools**: `read_file`, `write_file`, `list_directory`, `glob`, `search_file_content`
+- **Use**: Testing file operations with llama.cpp
+
+#### `llamacpp-test-multi`
+Minimal agent with multiple read-focused tools.
+- **Tools**: `Read`, `Glob`, `Grep`
+- **Use**: Testing multi-tool handling
+
+#### `llamacpp-test-read`
+Minimal agent with single Read tool for basic testing.
+- **Tools**: `Read` only
+- **Use**: Testing single tool reliability
+
+#### `llamacpp-test-readwrite`
+Basic file manipulation test agent.
+- **Tools**: `read_file`, `write_file`
+- **Use**: Testing read/write operations
+
+**Usage:**
+```bash
+# Use any test agent
+gemini-ma --agent llamacpp_expanded_tools
+gemini-ma --agent llamacpp_test_multi
+gemini-ma --agent llamacpp_test_read
+gemini-ma --agent llamacpp_test_readwrite
+```
+
+**Note:** These are experimental agents from development testing. For production use, stick with `ollama-coder` or `llamacpp-coder`.
 
 ## 🔄 Workflow
 
