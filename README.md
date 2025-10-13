@@ -10,9 +10,9 @@ gemini-ma-agents/
 │   ├── ollama-coder.md            # Ollama coding agent (full tools)
 │   ├── llamacpp-coder.md          # llama.cpp main agent (simplified)
 │   ├── llamacpp-expanded-tools.md # llama.cpp with expanded toolset
-│   ├── llamacpp-test-multi.md     # Test: multiple tools
-│   ├── llamacpp-test-read.md      # Test: single Read tool
-│   └── llamacpp-test-readwrite.md # Test: Read + Write tools
+│   ├── llamacpp-multi-tools.md    # llama.cpp with Read/Glob/Grep
+│   ├── llamacpp-read-only.md      # llama.cpp read-only mode
+│   └── llamacpp-readwrite.md      # llama.cpp read/write mode
 ├── examples/            # Example agent definitions for learning
 ├── scripts/             # Installation and management scripts
 │   ├── install.sh       # Copy agents to a project
@@ -106,40 +106,44 @@ gemini-ma --agent llamacpp_coder
 
 **Note:** For full tool support and complex workflows, use the `ollama-coder` agent instead.
 
-### Experimental llama.cpp Agents
+### Alternative llama.cpp Agents
 
-The following agents were created during testing to explore different tool configurations with llama.cpp:
+Additional llama.cpp agents with different tool configurations:
 
 #### `llamacpp-expanded-tools`
-Tests llama.cpp with an expanded toolset including file operations and code exploration tools.
+llama.cpp with expanded file operations and code exploration toolset.
 - **Tools**: `read_file`, `write_file`, `list_directory`, `glob`, `search_file_content`
-- **Use**: Testing file operations with llama.cpp
+- **Use**: File operations with llama.cpp
+- **Agent name**: `llamacpp_expanded_tools`
 
-#### `llamacpp-test-multi`
-Minimal agent with multiple read-focused tools.
+#### `llamacpp-multi-tools`
+llama.cpp with multiple file exploration tools.
 - **Tools**: `Read`, `Glob`, `Grep`
-- **Use**: Testing multi-tool handling
+- **Use**: Multi-tool file exploration
+- **Agent name**: `llamacpp_multi_tools`
 
-#### `llamacpp-test-read`
-Minimal agent with single Read tool for basic testing.
+#### `llamacpp-read-only`
+llama.cpp with read-only file access.
 - **Tools**: `Read` only
-- **Use**: Testing single tool reliability
+- **Use**: Safe read-only operations
+- **Agent name**: `llamacpp_read_only`
 
-#### `llamacpp-test-readwrite`
-Basic file manipulation test agent.
+#### `llamacpp-readwrite`
+llama.cpp with basic file read and write capabilities.
 - **Tools**: `read_file`, `write_file`
-- **Use**: Testing read/write operations
+- **Use**: Basic file manipulation
+- **Agent name**: `llamacpp_readwrite`
 
 **Usage:**
 ```bash
-# Use any test agent
+# Use any alternative agent
 gemini-ma --agent llamacpp_expanded_tools
-gemini-ma --agent llamacpp_test_multi
-gemini-ma --agent llamacpp_test_read
-gemini-ma --agent llamacpp_test_readwrite
+gemini-ma --agent llamacpp_multi_tools
+gemini-ma --agent llamacpp_read_only
+gemini-ma --agent llamacpp_readwrite
 ```
 
-**Note:** These are experimental agents from development testing. For production use, stick with `ollama-coder` or `llamacpp-coder`.
+**Note:** These agents offer different tool configurations for specific use cases. For general use, `ollama-coder` (full features) or `llamacpp-coder` (Q&A) are recommended.
 
 ## 🔄 Workflow
 

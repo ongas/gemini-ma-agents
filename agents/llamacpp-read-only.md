@@ -5,9 +5,9 @@ Temperature: 0.3
 Tools: Read
 ---
 
-# Test Agent - Read Tool Only
+# llama.cpp Read-Only Agent
 
-Testing llama.cpp with minimal context + single Read tool.
+llama.cpp agent with read-only file access.
 
 ## Instructions
 

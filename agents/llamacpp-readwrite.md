@@ -5,9 +5,9 @@ Temperature: 0.3
 Tools: read_file, write_file
 ---
 
-# Test Agent - Read and Write Tools
+# llama.cpp Read/Write Agent
 
-Testing llama.cpp with read_file and write_file tools.
+llama.cpp agent with file read and write capabilities.
 
 ## Instructions
 

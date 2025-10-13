@@ -5,9 +5,9 @@ Temperature: 0.3
 Tools: Read, Glob, Grep
 ---
 
-# Test Agent - Multiple Tools
+# llama.cpp Multi-Tools Agent
 
-Testing llama.cpp with minimal context + multiple tools (Read, Glob, Grep).
+llama.cpp agent with multiple file exploration tools (Read, Glob, Grep).
 
 ## Instructions
 
