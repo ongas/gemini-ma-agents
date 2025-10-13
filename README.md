@@ -7,7 +7,8 @@ A collection of reusable agent definitions for [gemini-ma](https://github.com/on
 ```
 gemini-ma-agents/
 ├── agents/              # Production-ready agent definitions
-│   ├── local-coder.md   # Ollama-based coding agent
+│   ├── local-coder.md   # Ollama-based coding agent (full tools)
+│   ├── llamacpp-coder.md # llama.cpp/vLLM coding agent (simplified)
 │   └── ...
 ├── examples/            # Example agent definitions for learning
 ├── scripts/             # Installation and management scripts
@@ -51,7 +52,7 @@ ln -s /mnt/e/source/personal_repos/gemini-ma-agents/agents agents
 
 ### `local-coder` - Local Ollama Coding Agent
 
-Uses Ollama's qwen2.5-coder:7b for fast, offline code generation.
+Uses Ollama's qwen2.5-coder:7b for fast, offline code generation with full tool support.
 
 **Use cases:**
 - Code generation and refactoring
@@ -67,6 +68,39 @@ Uses Ollama's qwen2.5-coder:7b for fast, offline code generation.
 ```bash
 gemini-ma --agent local_coder
 ```
+
+### `llamacpp-coder` - llama.cpp/vLLM Coding Agent
+
+Fast offline coding agent using llama.cpp via vLLM serving Qwen2.5-Coder-7B-Instruct.
+
+**Current Status - Simplified Mode:**
+Due to limitations with 7B parameter models, this agent operates without tool calling or conversation history. Best for simple Q&A and code generation.
+
+**Use cases:**
+- Fast code explanations
+- Algorithm discussions
+- Code generation from descriptions
+- Syntax help and programming Q&A
+- Offline development for lightweight queries
+
+**Requirements:**
+- vLLM serving llama.cpp model on port 8000
+- Environment: `export LLAMACPP_BASE_URL=http://localhost:8000`
+- Hardware: Minimum 8GB RAM + 8GB VRAM
+
+**Usage:**
+```bash
+# Start vLLM server first
+export HF_HOME="/path/to/models"
+python -m vllm.entrypoints.openai.api_server \
+  --model Qwen/Qwen2.5-Coder-7B-Instruct \
+  --host 0.0.0.0 --port 8000
+
+# Use the agent
+gemini-ma --agent llamacpp_coder
+```
+
+**Note:** For full tool support and complex workflows, use the `local-coder` agent with Ollama instead.
 
 ## 🔄 Workflow
 
