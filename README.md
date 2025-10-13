@@ -7,7 +7,7 @@ A collection of reusable agent definitions for [gemini-ma](https://github.com/on
 ```
 gemini-ma-agents/
 ├── agents/              # Production-ready agent definitions
-│   ├── local-coder.md   # Ollama-based coding agent (full tools)
+│   ├── ollama-coder.md   # Ollama-based coding agent (full tools)
 │   ├── llamacpp-coder.md # llama.cpp/vLLM coding agent (simplified)
 │   └── ...
 ├── examples/            # Example agent definitions for learning
@@ -23,7 +23,7 @@ gemini-ma-agents/
 
 ```bash
 # Copy a specific agent to your project
-cp agents/local-coder.md /path/to/your/project/.gemini/agents/
+cp agents/ollama-coder.md /path/to/your/project/.gemini/agents/
 
 # Verify it's available
 cd /path/to/your/project
@@ -37,7 +37,7 @@ gemini-ma --list-agents
 ./scripts/install.sh /path/to/your/project
 
 # Install specific agents
-./scripts/install.sh /path/to/your/project local-coder
+./scripts/install.sh /path/to/your/project ollama-coder
 ```
 
 ### Option 3: Symlink for Live Updates
@@ -50,15 +50,16 @@ ln -s /mnt/e/source/personal_repos/gemini-ma-agents/agents agents
 
 ## 📦 Available Agents
 
-### `local-coder` - Local Ollama Coding Agent
+### `ollama-coder` - Ollama Coding Agent
 
 Uses Ollama's qwen2.5-coder:7b for fast, offline code generation with full tool support.
 
 **Use cases:**
 - Code generation and refactoring
-- File operations
+- File operations with full tool access
 - Quick edits and debugging
 - Avoiding API quota limits
+- Complex multi-step workflows
 
 **Requirements:**
 - Ollama installed and running
@@ -66,7 +67,7 @@ Uses Ollama's qwen2.5-coder:7b for fast, offline code generation with full tool 
 
 **Usage:**
 ```bash
-gemini-ma --agent local_coder
+gemini-ma --agent ollama_coder
 ```
 
 ### `llamacpp-coder` - llama.cpp/vLLM Coding Agent
@@ -100,7 +101,7 @@ python -m vllm.entrypoints.openai.api_server \
 gemini-ma --agent llamacpp_coder
 ```
 
-**Note:** For full tool support and complex workflows, use the `local-coder` agent with Ollama instead.
+**Note:** For full tool support and complex workflows, use the `ollama-coder` agent instead.
 
 ## 🔄 Workflow
 
